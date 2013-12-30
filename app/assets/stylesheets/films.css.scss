@@ -1,0 +1,50 @@
+// Place all the styles related to the Films controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+.year-list {
+
+    a {
+        @include hover-link;
+        color: inherit;
+    }
+
+    ol {
+        color: #666;
+        line-height: 1.65;
+    }
+    strong {
+        color: #444;
+    }
+}
+
+.film__title {
+
+    a {
+        @include hover-link;
+        color: inherit;
+    }
+}
+
+
+.films__index {
+    h1 {
+        margin-top: 0;
+        float: left;
+        display: inline-block;
+    }
+    .button {
+        margin-top: 0.5em;
+        float: right;
+    }
+}
+
+.film {
+
+    img {
+        margin-top: 0.25em;
+        max-width: 100%;
+        height: auto;
+    }
+}

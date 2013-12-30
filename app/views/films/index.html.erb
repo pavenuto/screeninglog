@@ -1,0 +1,36 @@
+<% title "Films - Screening Log" %>
+
+<div class="films__index">
+
+  <h1>Films</h1>
+
+  <%= link_to 'New Film', new_film_path, :class => "button" %>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Year</th>
+        <th>Director</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @films.each do |film| %>
+      <tr>
+        <td><%= link_to film.title, film %></td>
+        <td><%= link_to film.year, "films/year/#{film.year}" %></td>
+        <td><% film.directors.each do |director| %>
+          <%= link_to director.try(:full_name), director %>
+          <% end %></td>
+          <!--         <td><%= link_to 'Show', film %></td>-->
+          <!-- <td><%= link_to 'Edit', edit_film_path(film), :class => 'action-link' %></td>
+          <td><%= link_to 'Destroy', film, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'action-link' %></td> -->
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+  </div>

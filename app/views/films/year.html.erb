@@ -1,0 +1,15 @@
+<div class="year-list">
+
+<h1>Film Year: <%= @year %></h1>
+
+<ol>
+  <% @films.each do |film| %>
+  <li>
+    <strong><%= link_to film.title, film %></strong> (<% film.directors.each do |director| %><%= link_to director.try(:full_name), director %><% end -%>)
+  </li>
+  <% end %>
+</ol>
+
+
+</div>
+

@@ -1,0 +1,31 @@
+<% title "Directors - Screening Log" %>
+
+<div class="directors__index">
+
+<h1>Directors</h1>
+
+<%= link_to 'New Director', new_director_path, :class => "button" %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Full name</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @directors.each do |director| %>
+      <tr>
+        <td><%= link_to director.full_name, director %></td>
+<!--         <td><%= link_to 'Show', director %></td>
+ -->     <!--    <td><%= link_to 'Edit', edit_director_path(director), :class => "action-link" %></td>
+        <td><%= link_to 'Destroy', director, method: :delete, data: { confirm: 'Are you sure?' }, :class => "action-link" %></td> -->
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+</div>

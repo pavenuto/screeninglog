@@ -1,0 +1,151 @@
+
+*, *:before, *:after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body {
+  // line-height: 1.5;
+  background: #ccc;
+}
+
+h1 {
+  font-weight: normal;
+
+  small {
+    font-size: 0.5em;
+    color: tint(#333,60%);
+  }
+}
+
+a {
+  @include single-transition(color, 0.2s, ease-in, 0);
+  color: #3da6e0;
+  &:hover { color: shade(#3da6e0,40%); }
+}
+
+.container {
+  @include clearfix;
+  max-width: 60em;
+  margin: 0 auto;
+  padding: 1em 3em 3.25em;
+  background-color: #fff;
+}
+
+.container > nav {
+  margin-top: 1em;
+  padding-bottom: 1.5em;
+  margin-bottom: 2em;
+  border-bottom: 1px solid tint(#ccc, 50%);
+}
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+nav li {
+  display: inline;
+  margin-right: 0.825em;
+}
+
+nav a {
+  @include hover-link;
+  color: shade(#ccc, 40%);
+
+  &:hover {
+    color: shade(#ccc,60%);
+  }
+}
+
+.action-link {
+  @include hover-link;
+  color: shade(#ccc, 10%);
+
+  &:hover {
+    color: shade(#ccc,70%);
+  }
+}
+
+table {
+  width: 100%;
+
+  th {
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    text-align: left;
+    font-size: 0.875em;
+  }
+
+  td {
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+  }
+  tr {
+    border-bottom: 1px solid tint(#ccc, 50%);
+  }
+}
+
+
+
+
+.button {
+  @include border-radius(1.25em);
+  display: inline-block;
+  font-size: 0.9em;
+  text-decoration: none;
+  color: shade(#ccc,50%);
+  background: tint(#ccc,20%);
+  padding: 0 1.5em;
+  line-height: 2.5;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+
+  &:hover {
+    color: shade(#ccc,80%);
+    background: tint(#ccc,10%);
+  }
+
+  &:active {
+    color: shade(#ccc,30%);
+    background: tint(#ccc,40%);
+  }
+
+}
+
+
+form {
+  margin-bottom: 2em;
+
+  label {
+    display: block;
+    padding-top: 0.75em;
+    padding-bottom: 0.5em;
+    text-align: left;
+    font-size: 0.875em;
+    font-weight: bold;
+  }
+  select,
+  input[type="text"],
+  input[type="number"] {
+    width: 100%;
+    @include border-radius(4px);
+    padding: 0.5em 0.75em;
+    border: 1px solid #ccc;
+  }
+
+  .actions {
+    margin-top: 2em;
+  }
+
+  input[type="submit"] {
+    @extend .button;
+    border: 0;
+    font-size: 1em;
+  }
+
+}

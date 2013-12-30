@@ -1,0 +1,20 @@
+<% title "#{@director.full_name} - Directors - Screening Log" %>
+
+
+<p id="notice"><%= notice %></p>
+
+<h1><%= @director.full_name %> <small>(<%= @director.films.count %>)</small></h1>
+
+
+<ul class="film-list">
+<% @director.films.each do |film| %>
+    <li>
+        <%= image_tag film.image.url(:thumb) %><br>
+        <%= link_to film.title, film %> (<%= film.year %>)
+    </li>
+<% end %>
+</ul>
+
+
+<%= link_to 'Edit', edit_director_path(@director) %> | <%= link_to 'Destroy', @director, method: :delete, data: { confirm: 'Are you sure?' } %>
+<%#= link_to 'Back', directors_path %>
