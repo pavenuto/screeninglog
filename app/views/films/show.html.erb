@@ -2,17 +2,16 @@
 
 <article class="film">
 
-<p id="notice"><%= notice %></p>
+    <p id="notice"><%= notice %></p>
 
-<h1 class="film__title"><%= @film.title %> (<%= link_to @film.year, "/films/year/#{@film.year}" %>, <% @film.directors.each do |director| %><%= link_to director.try(:full_name), director %><% end %>)</h1>
+    <h1 class="film__title"><%= @film.title %> (<%= link_to @film.year, "/films/year/#{@film.year}" %>, <% @film.directors.each do |director| %><%= link_to director.try(:full_name), director %><% end %>)</h1>
 
-<%= image_tag @film.image.url(:large) %>
+    <%= image_tag image_path(@film.image.url(:large)) if @film.image %>
 
-<p><%= link_to 'Edit', edit_film_path(@film) %> |
+    <p><%= link_to 'Edit', edit_film_path(@film) %> |
 
-<%= link_to 'Destroy', @film, method: :delete, data: { confirm: 'Are you sure?' } %> |
-<%= link_to 'Back', films_path %></p>
-
+        <%= link_to 'Destroy', @film, method: :delete, data: { confirm: 'Are you sure?' } %> |
+        <%= link_to 'Back', films_path %></p>
 
 
 </article>

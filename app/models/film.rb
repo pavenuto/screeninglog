@@ -22,5 +22,5 @@ class Film < ActiveRecord::Base
     ]
   end
 
-  scope :find_by_year, ->(year) { where(:year => year)}
+  scope :find_by_year, ->(year) { where(:year => year) }
 end
