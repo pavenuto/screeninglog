@@ -12,5 +12,8 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
+//= require chosen-jquery
+//= require underscore-min
+//= require pourover
+//= require main
 //= require_tree .

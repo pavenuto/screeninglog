@@ -26,6 +26,15 @@ gem 'friendly_id', '~> 5.0.0'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 
+# Add Chosen JS Library
+gem 'chosen-rails'
+
+# Font Awesome Icons
+gem "font-awesome-rails"
+
+# Will Paginate
+gem 'will_paginate', '~> 3.0'
+
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
 
@@ -50,3 +59,4 @@ end
 # gem 'debugger', group: [:development, :test]
 
 gem 'compass-rails', "~> 1.1.2"
+gem "susy"

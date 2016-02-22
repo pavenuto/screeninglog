@@ -4,6 +4,8 @@
 
 
 .year-list {
+    position: relative;
+    margin-bottom: 4em;
 
     a {
         @include hover-link;
@@ -11,11 +13,79 @@
     }
 
     ol {
+        font-size: 1.125em;
         color: #666;
-        line-height: 1.65;
+        line-height: 1.75;
+        margin-bottom: 2em;
     }
     strong {
         color: #444;
+    }
+    p {
+        line-height: 1.45;
+    }
+    .recent {
+      color: #3da6e0;
+  }
+  .rating {
+    margin-left: 0.5em;
+    color: tint(#666,40%);
+}
+.honorable-mentions {
+    line-height: 1.6;
+}
+}
+
+.top-tens {
+
+    > h1 { margin-bottom: 1.6em; }
+
+
+    h2 {
+        font-weight: normal;
+        font-size: 1.825em;
+    }
+
+    .year-list {
+        border-bottom: 1px solid tint(#ccc, 70%);
+        padding-bottom: 3.5em;
+    }
+
+}
+
+.top-100 {
+    @extend .year-list;
+
+    .button {
+        position: absolute;
+        top: 0.5em;
+        right: 0;
+
+        &:hover {
+            text-decoration: none;
+        }
+    }
+}
+
+.year-nav {
+    position: absolute;
+    top: 0.5em;
+    right: 0;
+
+    a {
+        @include single-transition(all, 0.2s, ease-in, 0s);
+        @include border-radius(8px);
+        @include clearfix;
+        border: 1px solid tint(#ccc, 50%);
+        padding: 1em 1.3em;
+        text-decoration: none;
+    }
+    a:hover {
+        border-color: tint(#ccc,15%);
+        text-decoration: none;
+    }
+    a:active {
+        border-color: tint(#ccc,5%);
     }
 }
 
@@ -38,6 +108,12 @@
         margin-top: 0.5em;
         float: right;
     }
+    .action-link {
+        opacity: 0.0;
+    }
+    tr:hover .action-link {
+        opacity: 1.0;
+    }
 }
 
 .film {
@@ -47,4 +123,39 @@
         max-width: 100%;
         height: auto;
     }
+
+    .screenings {
+        margin: 1em 0;
+    }
+    .screenings li {
+        line-height: 1.65;
+    }
+}
+
+.edit_film,
+.new_film {
+    @include micro-clearfix;
+
+    .film_title__field {
+        @include span-columns(9, 12);
+    }
+
+    .film_year__field {
+        @include span-columns(3 omega, 12);
+    }
+
+    .image__field,
+    .film_directors__field {
+        @include span-columns(12 omega, 12);
+    }
+
+    .actions {
+        @include span-columns(12 omega, 12);
+        clear: both;
+    }
+
+    .preview {
+        margin-top: 1em;
+    }
+
 }

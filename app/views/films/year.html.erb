@@ -1,14 +1,68 @@
+<% title "#{@year} - Films - Screening Log" %>
+
+
 <div class="year-list">
 
-<h1>Film Year: <%= @year %></h1>
+  <h1>Film Year: <%= @year %> <small><%= @films.count %></small></h1>
 
-<ol>
-  <% @films.each do |film| %>
-  <li>
-    <strong><%= link_to film.title, film %></strong> (<% film.directors.each do |director| %><%= link_to director.try(:full_name), director %><% end -%>)
-  </li>
+  <% if params[:type] == "grid" %>
+
+    <%= link_to "List", year_path(@year) %>
+
+    <div class="module-container">
+
+      <%- @films.each do |film| -%>
+
+      <div class="module">
+       <%= link_to film do %>
+       <%= image_tag image_path(film.image.url(:thumb))  %>
+       <% end %>
+     </div>
+
+
+     <% end -%>
+
+   </div>
+
+   <nav class="year-nav">
+    <% if @previous_year %>
+    <%= link_to "&larr; #{@previous_year}".html_safe, year_grid_path(@previous_year,"grid") %>
+    <% end %>
+    <% if @next_year %>
+    <%= link_to "#{@next_year} &rarr;".html_safe, year_grid_path(@next_year,"grid") %>
+    <% end %>
+  </nav>
+
+
+
+  <% else %>
+
+    <%= link_to "Grid", year_grid_path(@year,"grid") %>
+
+    <% if @films.blank? %>
+    <h2>No Films</h2>
+    <% else %>
+    <ol>
+      <% @films.each do |film| %>
+      <li<%= ' class="recent"'.html_safe if film.recently_seen? %>><b><%= link_to film.title, film %></b> (<%= display_directors(film) %>) <span class="rating"><%=h film.last_rating %></span></li>
+      <% end %>
+    </ol>
+    <% end %>
+
+    <nav class="year-nav">
+      <% if @previous_year %>
+      <%= link_to "&larr; #{@previous_year}".html_safe, year_path(@previous_year) %>
+      <% end %>
+      <% if @next_year %>
+      <%= link_to "#{@next_year} &rarr;".html_safe, year_path(@next_year) %>
+      <% end %>
+    </nav>
+
+
   <% end %>
-</ol>
+
+
+
 
 
 </div>

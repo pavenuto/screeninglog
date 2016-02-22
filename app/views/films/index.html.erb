@@ -2,7 +2,11 @@
 
 <div class="films__index">
 
-  <h1>Films</h1>
+  <% if params[:search]  %>
+  <h1>Search Results for &#8220;<%= params[:search] %>&#8221;</h1>
+  <% else %>
+  <h1>Films <small><%= @films.count %></small></h1>
+  <% end %>
 
   <%= link_to 'New Film', new_film_path, :class => "button" %>
 
@@ -22,15 +26,14 @@
       <tr>
         <td><%= link_to film.title, film %></td>
         <td><%= link_to film.year, "films/year/#{film.year}" %></td>
-        <td><% film.directors.each do |director| %>
-          <%= link_to director.try(:full_name), director %>
-          <% end %></td>
-          <!--         <td><%= link_to 'Show', film %></td>-->
-          <!-- <td><%= link_to 'Edit', edit_film_path(film), :class => 'action-link' %></td>
-          <td><%= link_to 'Destroy', film, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'action-link' %></td> -->
-        </tr>
-        <% end %>
-      </tbody>
-    </table>
+        <td><%= display_directors(film) %></td>
+        <td><%= link_to edit_film_path(film), :class => 'action-link' do %><%= fa_icon "pencil" %><% end %></td>
+        <td><%= link_to film, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'action-link' do %><%= fa_icon "times" %><% end %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
 
-  </div>
+  <%= will_paginate @films %>
+
+</div>

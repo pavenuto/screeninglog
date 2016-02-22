@@ -10,13 +10,31 @@
 
   <div class="container">
 
-    <nav>
-      <ul>
-        <li><%= link_to("Films",films_path) %></li>
-        <li><%= link_to("Directors",directors_path) %></li>
-        <li><%= link_to("Screenings",directors_path) %></li>
-      </ul>
-    </nav>
+    <header class="global-header">
+
+      <nav>
+        <ul>
+          <li><%= link_to("Films",films_path) %></li>
+          <li><%= link_to("Directors",directors_path) %></li>
+          <li>
+            <%= link_to("Screenings",screenings_path) %> &nbsp;
+            (<%= link_to("2016", "/screenings/year/2016") %>)
+          </li>
+          <li><%= link_to("Top Tens",top_tens_path) %></li>
+          <li><%= link_to("Top 100",top_100_path) %></li>
+          <li><%= link_to("Visualized",visualized_path) %></li>
+          <li><%= link_to("Recent",recent_path) %></li>
+        </ul>
+      </nav>
+
+      <div class="search">
+        <%= form_tag("/search", method: "get") do %>
+        <input type="text" name="search" value="<%= params[:search] %>" id="search" placeholder="Search Films">
+        <% end %>
+        <%#= fa_icon "search" %>
+      </div>
+
+    </header>
 
     <%= yield %>
   </div>

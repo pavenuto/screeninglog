@@ -4,17 +4,74 @@ class FilmsController < ApplicationController
   # GET /films
   # GET /films.json
   def index
+    @films = Film.all.paginate(:page => params[:page], :per_page => 30)
+  end
+
+  def all
     @films = Film.all
   end
 
+  def no_images
+
+    @films = Film.where({:image_file_size => nil}).paginate(:page => params[:page], :per_page => 30)
+
+    render :action => "index"
+  end
+
+
+  def search
+    @films = Film.search(params[:search]).paginate(:page => (params[:page] || 1),
+                                       :per_page => (params[:count] || 60))
+    render :action => "index"
+  end
+
   def year
-    @year = params[:year]
+    @year = params[:year].to_i
+    @next_year = @year + 1 if @year < Time.now.year
+    @previous_year = @year - 1
+
     @films = Film.find_by_year(params[:year])
+    sort_to_most_recent_rating
+  end
+
+  def toptens
+    @films = Film.joins(:screenings).favorites.all(:include => [:screenings], :order => "screenings.rating DESC")
+    sort_to_most_recent_rating
+    @film_years = @films.group_by { |t| t.year }
+  end
+
+  def top100
+    @films = Film.top_100
+  end
+
+  def worst
+    @films = Film.worst
+    render :action => "top100"
+  end
+
+  def decades
+    @films = Film.joins(:screenings).favorites.all(:include => [:screenings], :order => "screenings.rating DESC")
+    sort_to_most_recent_rating
+    @decades = @films.group_by { |t| t.decade }
+  end
+
+  def no_directors
+    @films = Film.all.select {|f| f.directors.count == 0 }
+    render :action => 'year'
+  end
+
+  def rating
+    @start, @end = params[:rating].split("-")
+    @films = Film.joins(:screenings).merge(Screening.where("rating >= #{@start} AND rating <= #{@end}")).paginate(:page => params[:page], :per_page => 30)
+    render :action => "index"
   end
 
   # GET /films/1
   # GET /films/1.json
   def show
+
+    @screenings = @film.screenings.order('date ASC')
+
     if request.path != film_path(@film)
       redirect_to @film, status: :moved_permanently
     else
@@ -90,4 +147,4 @@ class FilmsController < ApplicationController
     def film_params
       params.require(:film).permit(:title, :year, :image, :director_ids => [])
     end
-end
+  end

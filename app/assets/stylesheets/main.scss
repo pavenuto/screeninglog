@@ -1,5 +1,13 @@
 
-*, *:before, *:after {
+$total-columns  : 12;             // a 12-column grid
+$column-width   : 4.5em;            // each column is 4em wide
+$gutter-width   : 1em;            // 1em gutters between columns
+$grid-padding   : 3em;            // grid-padding equal to gutters
+
+
+*,
+*:before,
+*:after {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -14,7 +22,7 @@ h1 {
   font-weight: normal;
 
   small {
-    font-size: 0.5em;
+    font-size: 0.825em;
     color: tint(#333,60%);
   }
 }
@@ -26,37 +34,66 @@ a {
 }
 
 .container {
-  @include clearfix;
-  max-width: 60em;
-  margin: 0 auto;
-  padding: 1em 3em 3.25em;
+  @include micro-clearfix;
+  @include container;
+  padding-top: 1em;
+  padding-bottom: 3.25em;
   background-color: #fff;
 }
 
-.container > nav {
+.global-header {
+  @include micro-clearfix;
   margin-top: 1em;
   padding-bottom: 1.5em;
   margin-bottom: 2em;
-  border-bottom: 1px solid tint(#ccc, 50%);
+  border-bottom: 1px solid tint(#ccc, 70%);
 }
 
-nav ul {
+.global-header nav {
+  @include span-columns(9);
+  @include at-breakpoint(48em 12) {
+   margin-bottom: 0;
+ }
+ margin-top: 0.65em;
+ margin-bottom: 0.75em;
+
+ ul {
   margin: 0;
   padding: 0;
   list-style: none;
 }
-
-nav li {
-  display: inline;
-  margin-right: 0.825em;
+li {
+  margin-bottom: 1.0rem;
+  @include at-breakpoint(48em 12) {
+    display: inline;
+    margin-right: 1.25em;
+    margin-bottom: 0;
+  }
 }
-
-nav a {
+a {
   @include hover-link;
   color: shade(#ccc, 40%);
+}
+a:hover {
+  color: shade(#ccc,60%);
+}
+}
 
-  &:hover {
-    color: shade(#ccc,60%);
+.search {
+  @include at-breakpoint(48em 12) {
+    @include span-columns(3 omega,12);
+  }
+
+  form {
+    margin-bottom: 0;
+  }
+  input[type="text"] {
+    border: 1px solid tint(#ccc, 50%);
+    position: relative;
+
+    &:before {
+      content: "\f002";
+    }
   }
 }
 
@@ -71,27 +108,43 @@ nav a {
 
 table {
   width: 100%;
+  margin-top: 2em;
+  clear: both;
 
   th {
-    padding-top: 0.5em;
-    padding-bottom: 0.5em;
     text-align: left;
     font-size: 0.875em;
   }
 
-  td {
-    padding-top: 0.5em;
-    padding-bottom: 0.5em;
+  td, th {
+    padding-top: 0.85em;
+    padding-bottom: 0.85em;
   }
+
   tr {
-    border-bottom: 1px solid tint(#ccc, 50%);
+    border-bottom: 1px solid tint(#ccc, 70%);
+
+    td:first-child, th:first-child { padding-left: 0.75em; }
+    td:last-child, th:last-child { padding-right: 0.75em; }
   }
+  tr:target > td,
+  tr:hover > td {
+    background-color: tint(#ccc,80%);
+  }
+  .repeat {
+    font-style: italic;
+  }
+
+}
+
+.director-link {
+  @include hover-link;
+  color: inherit;
 }
 
 
-
-
 .button {
+  @include single-transition(all, 0.25s, ease, 0s);
   @include border-radius(1.25em);
   display: inline-block;
   font-size: 0.9em;
@@ -107,7 +160,7 @@ table {
 
   &:hover {
     color: shade(#ccc,80%);
-    background: tint(#ccc,10%);
+    background: tint(#ccc,0%);
   }
 
   &:active {
@@ -129,13 +182,18 @@ form {
     font-size: 0.875em;
     font-weight: bold;
   }
+  .chosen-container > a,
   select,
   input[type="text"],
   input[type="number"] {
-    width: 100%;
     @include border-radius(4px);
-    padding: 0.5em 0.75em;
+    width: 100%;
+    padding: 0.65em 0.75em;
     border: 1px solid #ccc;
+
+    &:hover {
+      border-color: shade(#ccc,20%);
+    }
   }
 
   .actions {
@@ -146,6 +204,109 @@ form {
     @extend .button;
     border: 0;
     font-size: 1em;
+    outline: 0;
   }
 
+}
+
+.pagination {
+  margin-top: 3em;
+  text-align: center;
+  clear: both;
+
+  .disabled {
+    color: shade(#ccc, 10%);
+  }
+
+  .current {
+    font-style: normal;
+    font-weight: bold;
+  }
+  em,
+  span,
+  a {
+    padding: 0 0.25em;
+    margin: 0 0.125em;
+  }
+  a {
+    @include hover-link;
+  }
+}
+
+
+.module-container {
+  @include clearfix;
+}
+
+.module {
+  @include at-breakpoint(36em 12) {
+    @include isolate-grid(6,12);
+  }
+  @include at-breakpoint(48em 12) {
+    @include isolate-grid(4,12);
+  }
+  margin-bottom: 1%;
+  position: relative;
+
+  img {
+    width: 100%;
+    height: auto;
+  }
+}
+.module__info {
+  @include transition(0.2s ease-in);
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.7);
+  color: #fff;
+  text-align: center;
+
+  a {
+    color: #fff;
+    text-decoration: none;
+  }
+
+  .module:hover & {
+    opacity: 1;
+  }
+}
+
+.module__meta {
+  display: block;
+  color: shade(#fff, 30%);
+
+  a {
+    color: shade(#fff, 30%);
+  }
+}
+
+.module__film-title {
+  font-size: 1.2em;
+  line-height: 1.15;
+  padding-bottom: 0.25em;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  display: block;
+}
+
+.module__rating {
+  margin-top: 0.4em;
+  display: inline-block;
+  font-size: 0.875em;
+}
+
+.inner-cell {
+  display: table;
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+
+.center-cell {
+  display: table-cell;
+  vertical-align: middle;
 }

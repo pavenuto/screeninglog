@@ -4,7 +4,7 @@ class DirectorsController < ApplicationController
   # GET /directors
   # GET /directors.json
   def index
-    @directors = Director.all
+    @directors = Director.all.paginate(:page => params[:page], :per_page => 30)
 
     # respond_to do |format|
     #   format.html
@@ -15,6 +15,7 @@ class DirectorsController < ApplicationController
   # GET /directors/1
   # GET /directors/1.json
   def show
+    @films = @director.films.order('year ASC')
   end
 
   # GET /directors/new
@@ -47,7 +48,7 @@ class DirectorsController < ApplicationController
   def update
     respond_to do |format|
       if @director.update(director_params)
-        format.html { redirect_to @director, notice: 'Director was successfully updated.' }
+        format.html { redirect_to @director, :page => params[:page], notice: 'Director was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -61,7 +62,7 @@ class DirectorsController < ApplicationController
   def destroy
     @director.destroy
     respond_to do |format|
-      format.html { redirect_to directors_url }
+      format.html { redirect_to directors_url, :page => params[:page] }
       format.json { head :no_content }
     end
   end

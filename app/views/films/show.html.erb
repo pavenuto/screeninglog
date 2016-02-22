@@ -2,16 +2,26 @@
 
 <article class="film">
 
-    <p id="notice"><%= notice %></p>
+  <p id="notice"><%= notice %></p>
 
-    <h1 class="film__title"><%= @film.title %> (<%= link_to @film.year, "/films/year/#{@film.year}" %>, <% @film.directors.each do |director| %><%= link_to director.try(:full_name), director %><% end %>)</h1>
+  <h1 class="film__title"><%= @film.title %> (<%= link_to @film.year, "/films/year/#{@film.year}" %>, <%= display_directors(@film) %>)</h1>
 
-    <%= image_tag image_path(@film.image.url(:large)) if @film.image %>
+  <%= image_tag image_path(@film.image.url(:large)) if @film.image %>
 
-    <p><%= link_to 'Edit', edit_film_path(@film) %> |
+  <div class="screenings">
+    <%= link_to 'New Screening', "/screenings/new?id=#{@film.id}", :class => "button" %>
+    <ol>
+      <%- @screenings.each do |screening| -%>
+      <li><%= link_to screening.date.strftime("%m/%d/%Y %I:%M %p"), screening %> <span>(<%= screening.rating %>)</span></li>
+      <%- end -%>
+    </ol>
+  </div>
 
-        <%= link_to 'Destroy', @film, method: :delete, data: { confirm: 'Are you sure?' } %> |
-        <%= link_to 'Back', films_path %></p>
+  <p>
+    <%= link_to 'Edit', edit_film_path(@film) %> |
+    <%= link_to 'Destroy', @film, method: :delete, data: { confirm: 'Are you sure?' } %> |
+    <%= link_to 'Back', films_path %>
+  </p>
 
 
 </article>

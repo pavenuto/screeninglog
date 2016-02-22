@@ -1,15 +1,34 @@
-// Place all the styles related to the Directors controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
-
 
 .film-list {
+    @include micro-clearfix;
     margin: 0 0 5em;
     padding: 0;
     list-style: none;
+
+    li {
+        margin-bottom: 1.5em;
+
+        @include at-breakpoint(36em 12) {
+            @include isolate-grid(6,12);
+        }
+        @include at-breakpoint(48em 12) {
+            @include isolate-grid(4,12);
+        }
+    }
+    img {
+        width: 100%;
+        height: auto;
+        margin-bottom: 0.5em;
+    }
+    small {
+        padding: 2px 5px;
+        border-radius: 2px;
+        background-color: tint(#ccc,60%);
+    }
 }
 
 .directors__index {
+
     h1 {
         margin-top: 0;
         float: left;
@@ -18,5 +37,85 @@
     .button {
         margin-top: 0.5em;
         float: right;
+    }
+    .action-link {
+        opacity: 0.0;
+    }
+    tr:hover .action-link {
+        opacity: 1.0;
+    }
+
+}
+
+.edit_director,
+.new_director {
+
+     &:after {
+        clear: both;
+        content: ".";
+        display: block;
+        height: 0;
+        overflow: hidden;
+        visibility: hidden;
+    }
+
+    @include at-breakpoint(40em 12) {
+
+        .field {
+            @include span-columns(4, 12);
+        }
+        .last_name {
+            @include omega();
+        }
+
+    }
+
+    .actions {
+        @include span-columns(12 omega);
+        clear: both;
+        margin-top: 2.25em;
+    }
+}
+
+
+.director-name {
+    @include span-columns(9,12);
+}
+
+.director-action-nav {
+    @include span-columns(3 omega, 12);
+    text-align: right;
+    margin-top: 2.25em;
+}
+
+
+.director .film-list {
+    @include span-columns(12 omega, 12);
+    margin-top: 1em;
+}
+
+.rating-graph {
+    clear: both;
+    height: 100px;
+    position: relative;
+
+    ul {
+        display: block;
+        position: absolute;
+        bottom: 0;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    li {
+        background: shade(#3da6e0,20%);
+        color: #fff;
+        position: absolute;
+        bottom: 0;
+        display: block;
+        width: 30px;
+        text-align: center;
+
     }
 }

@@ -2,30 +2,30 @@
 
 <div class="directors__index">
 
-<h1>Directors</h1>
+  <h1>Directors <small><%= @directors.count %></small></h1>
 
-<%= link_to 'New Director', new_director_path, :class => "button" %>
+  <%= link_to 'New Director', new_director_path, :class => "button" %>
 
-<table>
-  <thead>
-    <tr>
-      <th>Full name</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
+  <table>
+    <thead>
+      <tr>
+        <th>Full name</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
 
-  <tbody>
-    <% @directors.each do |director| %>
+    <tbody>
+      <% @directors.each do |director| %>
       <tr>
         <td><%= link_to director.full_name, director %></td>
-<!--         <td><%= link_to 'Show', director %></td>
- -->     <!--    <td><%= link_to 'Edit', edit_director_path(director), :class => "action-link" %></td>
-        <td><%= link_to 'Destroy', director, method: :delete, data: { confirm: 'Are you sure?' }, :class => "action-link" %></td> -->
+        <td><%= link_to edit_director_path(director), :class => "action-link" do %><%= fa_icon "pencil" %><% end %></td>
+        <td><%= link_to director, method: :delete, data: { confirm: 'Are you sure?' }, :class => "action-link" do %><%= fa_icon "times" %><% end %></td>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+      <% end %>
+    </tbody>
+  </table>
+
+  <%= will_paginate @directors %>
 
 </div>

@@ -1,20 +1,38 @@
 <% title "#{@director.full_name} - Directors - Screening Log" %>
+<article class="director">
+
+    <p id="notice"><%= notice %></p>
+
+    <h1 class="director-name"><%= @director.full_name %> <small><%= @films.count %></small></h1>
+
+    <nav class="director-action-nav">
+        <%= link_to edit_director_path(@director), :class => 'action-link' do %><%= fa_icon "pencil", text: "Edit" %><% end %> &nbsp;&nbsp;
+        <%= link_to @director, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'action-link' do %><%= fa_icon "times", text: "Delete" %><% end %>
+    </nav>
+
+    <ul class="film-list">
+        <% @films.each do |film| %>
+        <li>
+            <%= link_to image_tag(film.image.url(:thumb)), film %>
+            <%= link_to film.title, film %> (<%= film.year %>)
+            <small><%= film.last_rating %></small>
+        </li>
+        <% end %>
+    </ul>
+
+    <div class="rating-graph">
+        <ul>
+            <% @films.each_with_index do |film, index| %>
+            <li style="left: <%= index * 31 %>px; height: <%= film.last_rating %>px;">
+                <small><%= film.last_rating %></small>
+            </li>
+            <% end %>
+        </ul>
+    </div>
+
+    <p>Average Rating: <%= (@films.collect(&:last_rating).sum.to_f/@films.length).round if @films.length > 0 %></p>
 
 
-<p id="notice"><%= notice %></p>
-
-<h1><%= @director.full_name %> <small>(<%= @director.films.count %>)</small></h1>
+</article>
 
 
-<ul class="film-list">
-<% @director.films.each do |film| %>
-    <li>
-        <%= image_tag film.image.url(:thumb) %><br>
-        <%= link_to film.title, film %> (<%= film.year %>)
-    </li>
-<% end %>
-</ul>
-
-
-<%= link_to 'Edit', edit_director_path(@director) %> | <%= link_to 'Destroy', @director, method: :delete, data: { confirm: 'Are you sure?' } %>
-<%#= link_to 'Back', directors_path %>

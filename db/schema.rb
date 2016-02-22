@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131230044017) do
+ActiveRecord::Schema.define(version: 20131230170904) do
 
   create_table "directors", force: true do |t|
     t.string   "first_name"
@@ -53,5 +53,13 @@ ActiveRecord::Schema.define(version: 20131230044017) do
   add_index "friendly_id_slugs", ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type", using: :btree
   add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id", using: :btree
   add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
+
+  create_table "screenings", force: true do |t|
+    t.datetime "date"
+    t.integer  "rating"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "film_id"
+  end
 
 end
