@@ -1,7 +1,9 @@
 <% title "#{@director.full_name} - Directors - Screening Log" %>
 <article class="director">
 
-    <p id="notice"><%= notice %></p>
+    <% if notice %>
+        <p class="notice"><%= notice %></p>
+    <% end %>
 
     <h1 class="director-name"><%= @director.full_name %> <small><%= @films.count %></small></h1>
 
@@ -14,8 +16,10 @@
         <% @films.each do |film| %>
         <li>
             <%= link_to image_tag(film.image.url(:thumb)), film %>
+            <div class="film-list__info">
             <%= link_to film.title, film %> (<%= film.year %>)
-            <small><%= film.last_rating %></small>
+            <small><%= film.last_rating %> / <%= star_rating(film.last_rating) %></small>
+            </div>
         </li>
         <% end %>
     </ul>

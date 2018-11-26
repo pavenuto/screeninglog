@@ -1,0 +1,201 @@
+
+.screening__index {
+    position: relative;
+
+    h1 {
+        margin-top: 0;
+        float: left;
+        display: inline-block;
+    }
+    .button {
+        margin-top: 0.5em;
+        float: right;
+    }
+    .action-link {
+        opacity: 0.0;
+    }
+    tr:hover .action-link {
+        opacity: 1.0;
+    }
+}
+.screening-date {
+  @include hover-link;
+  color: shade(#ccc, 10%);
+
+  &:hover {
+    color: shade(#ccc,70%);
+  }
+}
+
+.year-nav {
+    position: absolute;
+    top: 0.5em;
+    right: 0;
+
+    a {
+        @include single-transition(all, 0.2s, ease-in, 0s);
+        @include border-radius(8px);
+        border: 1px solid tint(#ccc, 50%);
+        padding: 1em 1.3em;
+        text-decoration: none;
+        @include hover-link;
+        color: inherit;
+
+    }
+    a:hover {
+        border-color: tint(#ccc,15%);
+        text-decoration: none;
+    }
+    a:active {
+        border-color: tint(#ccc,5%);
+    }
+}
+
+
+.screening__recent {
+    clear: both;
+    @include micro-clearfix;
+}
+
+.film-cell {
+    max-width: 600px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
+.edit_screening,
+.new_screening {
+
+    select {
+        width: auto;
+    }
+
+    #screening_rating {
+        width: auto;
+    }
+}
+
+
+.info-graphics h3 {
+    float: left;
+    clear: left;
+    font-size: 0.8rem;
+    margin: 0 0 2px;
+    padding: 0.5rem;
+    width: 3.6rem;
+    text-align: right;
+    a {
+        text-decoration: none;
+        color: inherit;
+    }
+}
+
+.ratings {
+    line-height: 1.5;
+}
+
+@keyframes loadbar {
+
+  0% {
+    width: 0;
+  }
+
+
+}
+@-webkit-keyframes loadbar {
+
+  0% {
+    width: 0;
+  }
+
+
+}
+
+.bar {
+    //@include single-transition(background, 0.15s, ease-in, 0);
+    //@include single-transition(all, 0.4s, ease-out, 0);
+
+    // animation:loadbar 1s normal forwards ease-in-out;
+    // -webkit-animation:loadbar 1s normal forwards ease-in-out;
+
+    float: left;
+    font-size: 0.8rem;
+    color: rgba(#fff, 0.6);
+    padding: 0.5rem 0;
+    text-align: right;
+    margin-bottom: 2px;
+    background: shade(#3da6e0,20%);
+    min-width: 2px;
+
+    &:hover { background: shade(#3da6e0,40%); color: #fff; }
+}
+
+.info-graphics {
+
+    h2 {
+        font-weight: 200;
+    }
+
+    > div {
+        @include micro-clearfix;
+        margin-bottom: 3rem;
+    }
+
+}
+
+.visualization-table {
+    // line-height: 1.375rem;
+
+    &.half {
+        width: 50%;
+    }
+
+    tr {
+        border: 0;
+    }
+
+    td {
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+
+    a {
+        text-decoration: none;
+        color: inherit;
+    }
+    a:hover .bar {
+        background: shade(#3da6e0,40%);
+        padding-left: 2rem;
+    }
+
+    h3 {
+        flex: 1;
+        width: auto;
+    }
+}
+.visualization-count {
+    text-align: right;
+    padding-right: 0.5rem;
+    font-size: 0.8rem;
+    width: 3%;
+}
+
+.most-watched-directors__director {
+    width: 22%;
+}
+.most-watched-directors__bar {
+    width: 88%;
+}
+
+.visualization-range {
+    width: 10%;
+}
+
+
+
+.most-watched-films {
+
+    h3 { width: 11rem; }
+}

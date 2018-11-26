@@ -1,0 +1,19 @@
+<% title "JSON Experiment - Screening Log" %>
+
+
+
+
+<script>
+
+    var films = <%= raw @films.to_json %>;
+
+
+    var collection = new PourOver.Collection(films);
+
+    var year_filter = PourOver.makeExactFilter("year", 1999);
+
+    collection.addFilters([year_filter]);
+
+    console.log(collection);
+
+</script>

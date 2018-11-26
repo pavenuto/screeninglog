@@ -4,7 +4,7 @@ class FilmsController < ApplicationController
   # GET /films
   # GET /films.json
   def index
-    @films = Film.all.paginate(:page => params[:page], :per_page => 30)
+    @films = Film.all.includes(:directors).paginate(:page => params[:page], :per_page => 30)
   end
 
   def all
@@ -13,14 +13,14 @@ class FilmsController < ApplicationController
 
   def no_images
 
-    @films = Film.where({:image_file_size => nil}).paginate(:page => params[:page], :per_page => 30)
+    @films = Film.where({:image_file_size => nil}).paginate(:page => params[:page], :per_page => 30).reverse_order
 
     render :action => "index"
   end
 
 
   def search
-    @films = Film.search(params[:search]).paginate(:page => (params[:page] || 1),
+    @films = Film.includes(:directors).search(params[:search]).paginate(:page => (params[:page] || 1),
                                        :per_page => (params[:count] || 60))
     render :action => "index"
   end
@@ -30,12 +30,12 @@ class FilmsController < ApplicationController
     @next_year = @year + 1 if @year < Time.now.year
     @previous_year = @year - 1
 
-    @films = Film.find_by_year(params[:year])
+    @films = Film.includes(:screenings, :directors).find_by_year(params[:year])
     sort_to_most_recent_rating
   end
 
   def toptens
-    @films = Film.joins(:screenings).favorites.all(:include => [:screenings], :order => "screenings.rating DESC")
+    @films = Film.joins(:screenings).favorites.all(:include => [:screenings, :directors], :order => "screenings.rating DESC")
     sort_to_most_recent_rating
     @film_years = @films.group_by { |t| t.year }
   end
@@ -62,7 +62,7 @@ class FilmsController < ApplicationController
 
   def rating
     @start, @end = params[:rating].split("-")
-    @films = Film.joins(:screenings).merge(Screening.where("rating >= #{@start} AND rating <= #{@end}")).paginate(:page => params[:page], :per_page => 30)
+    @films = Film.order('title ASC').joins(:screenings).merge(Screening.where("rating >= #{@start} AND rating <= #{@end}")).paginate(:page => params[:page], :per_page => 30)
     render :action => "index"
   end
 

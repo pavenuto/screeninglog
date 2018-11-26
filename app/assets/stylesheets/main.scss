@@ -16,6 +16,7 @@ $grid-padding   : 3em;            // grid-padding equal to gutters
 body {
   // line-height: 1.5;
   background: #ccc;
+  background: #efefef;
 }
 
 h1 {
@@ -46,7 +47,7 @@ a {
   margin-top: 1em;
   padding-bottom: 1.5em;
   margin-bottom: 2em;
-  border-bottom: 1px solid tint(#ccc, 70%);
+  // border-bottom: 1px solid tint(#ccc, 70%);
 }
 
 .global-header nav {
@@ -213,9 +214,18 @@ form {
   margin-top: 3em;
   text-align: center;
   clear: both;
+  overflow: auto;
 
   .disabled {
     color: shade(#ccc, 10%);
+  }
+
+  .previous_page {
+    float: left;
+  }
+
+  .next_page {
+    float: right;
   }
 
   .current {

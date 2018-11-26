@@ -14,9 +14,11 @@ class Film < ActiveRecord::Base
 
 
   scope :find_by_year, ->(year) { where(:year => year) }
-  scope :favorites, :include => :screenings, :conditions => ["screenings.rating > 59"]
+  scope :favorites, -> { includes(:screenings).where("screenings.rating > ?", "59") }
+  # scope :favorites, :include => :screenings, :conditions => ["screenings.rating > 59"]
+  # scope :ordered, lambda { |order| { :order => order || 'title ASC' }}
 
-  scope :ordered, lambda { |order| { :order => order || 'title ASC' }}
+  # default_scope { includes(:directors) }
 
 
   extend FriendlyId
@@ -56,14 +58,14 @@ class Film < ActiveRecord::Base
   end
 
   def self.top_100
-    all_films = Film.find(:all, :include => [:screenings])
+    all_films = Film.all.includes(:screenings)
     all_films.sort do |a, b|
       if a.last_rating == b.last_rating
         b.title <=> a.title
       else
         a.last_rating <=> b.last_rating
       end
-    end.reverse[0..199]
+    end.reverse[0..249]
   end
 
   def self.worst
@@ -79,8 +81,6 @@ class Film < ActiveRecord::Base
 
   def self.search(search)
     if search
-      #find(:all, :conditions => ['title LIKE ?', "%#{search}%"])
-
       Film.all.where('lower(title) LIKE :q', {:q => "%#{search}%"})
     else
       find(:all)

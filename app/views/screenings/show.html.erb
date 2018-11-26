@@ -1,0 +1,18 @@
+<p class="notice"><%= notice %></p>
+
+
+<h1><%= link_to @screening.film.title, @screening.film %> (<%=h @screening.film.year %>, <%= display_directors(@screening.film) %>) <%=h @screening.rating %></h1>
+
+<p>
+  <strong>Date:</strong>
+  <%# TODO: link to screening year page for easy navigation %>
+  <%= link_to @screening.date, "/screenings/year/#{@screening.date.year}##{@screening.id}", :class => "action-link" %>
+</p>
+
+<p>
+  <strong>Rating:</strong>
+  <%= @screening.rating %>
+</p>
+
+<%= link_to 'Edit', edit_screening_path(@screening) %> |
+<%= link_to 'Back', screenings_path %>

@@ -11,7 +11,7 @@
 @import "screenings";
 
 body {
-  background-color: tint(#ccc, 80%);
+  background-color: tint(#ccc, 90%);
   color: #555;
   font-family: Helvetica, sans-serif;
 }
@@ -28,7 +28,7 @@ div {
   }
 }
 
-#notice {
+.notice {
   color: green;
 }
 

@@ -1,0 +1,38 @@
+<% title "#{@year} - Screenings - Screening Log" %>
+
+<div class="screening__index">
+
+  <h1>Screenings: <%= @year %> <small><%= @screenings.count %></small></h1>
+
+  <table id="screenings">
+    <thead>
+      <tr>
+        <th></th>
+        <th>Date</th>
+        <th>Film</th>
+        <th>Rating</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @screenings.each_with_index do |screening, index| %>
+        <tr id="<%= screening.id %>">
+          <td><%= index + 1 %>.</td>
+          <td><%= link_to screening.date.strftime("%Y-%m-%d"), screening, :class => "screening-date" %></td>
+          <td class="film-cell<%= ' repeat' if screening.film.screenings.size > 1 and (screening.film.screenings.first != screening) %>"><%= link_to screening.film.title, screening.film %> (<%= link_to screening.film.year, year_path(screening.film.year), :class => "director-link" %>, <%= screening.film.directors.map{|d|  link_to(d.try(:full_name), d, :class => "director-link")}.join(", ").html_safe %>)</td>
+          <td><%= screening.rating %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <nav class="year-nav">
+    <%= link_to "&larr; #{@previous_year}".html_safe, screening_year_path(@previous_year) %>
+   <% if @next_year %>
+    <%= link_to "#{@next_year} &rarr;".html_safe, screening_year_path(@next_year) %>
+   <% end %>
+ </nav>
+
+
+
+</div>

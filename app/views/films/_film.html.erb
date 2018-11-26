@@ -1,0 +1,1 @@
+<li<%= ' class="recent"'.html_safe if film.recently_seen? %>><b><%= link_to film.title, film %></b> (<%= film.year %>, <%= display_directors(film) %>) <span class="rating"><%=h film.last_rating %></span></li><%= "\r" %>

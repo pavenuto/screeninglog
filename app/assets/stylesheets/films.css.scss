@@ -89,6 +89,10 @@
     }
 }
 
+.film__title-container {
+    @include span-columns(9,12);
+}
+
 .film__title {
 
     a {

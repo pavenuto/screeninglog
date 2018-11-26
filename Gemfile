@@ -60,3 +60,5 @@ end
 
 gem 'compass-rails', "~> 1.1.2"
 gem "susy"
+
+gem "bullet", :group => "development"

@@ -1,0 +1,16 @@
+<% title "Decades - Screening Log" %>
+
+<div class="top-tens">
+  <h1>Top Films by Decade</h1>
+  <% @decades.sort.reverse.each do |decade, films|  %>
+  <div class="year-list">
+    <h2><%= decade %></h2>
+    <ol>
+     <%= render films[0..29] %>
+   </ol>
+ </div>
+ <% end -%>
+
+</div>
+
+

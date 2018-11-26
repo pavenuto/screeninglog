@@ -1,7 +1,7 @@
 <% title "#{@year} - Films - Screening Log" %>
 
 
-<div class="year-list">
+<div class  ="year-list">
 
   <h1>Film Year: <%= @year %> <small><%= @films.count %></small></h1>
 
@@ -17,6 +17,15 @@
        <%= link_to film do %>
        <%= image_tag image_path(film.image.url(:thumb))  %>
        <% end %>
+
+      <div class="module__info">
+      <div class="inner-cell"><div class="center-cell">
+        <%= link_to film.title, film, :class => "module__film-title" %>
+        <span class="module__meta">(<%=h film.year %>, <%= display_directors(film) %>)<br>
+          <span class="module__rating"><%=h film.last_rating %></span>
+        </span></div>
+      </div>
+    </div>
      </div>
 
 

@@ -1,0 +1,45 @@
+<%= form_for(@screening) do |f| %>
+  <% if @screening.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@screening.errors.count, "error") %> prohibited this screening from being saved:</h2>
+
+      <ul>
+      <% @screening.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :film_id %><br />
+    <%= f.collection_select(:film_id, Film.find(:all), :id, :title, {:prompt => true}, :class => "chosen-select") %>
+  </div>
+
+  <div class="field">
+    <%= f.label :date %><br>
+    <%= f.datetime_select :date %>
+  </div>
+  <div class="field">
+    <%= f.label :rating %><br>
+    <%= f.number_field :rating %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+
+  <div class="ratings">
+    <p>
+    100-90: Masterpiece, or damn close. Very rare.<br>
+ 89-80: Fanthefucktastic. Near-lock for my year-end top 10 list.<br>
+ 79-70: Definitely something special. Do not miss. Likely list contender.<br>
+ 69-60: Very good, but also flawed or missing some crucial element.<br>
+ 59-50: Didn’t quite work for me, but has many redeeming qualities.<br>
+ 49-40: Demerits clearly outweigh merits.<br>
+ 39-30: I really did not enjoy this picture, but talent was involved.<br>
+ 29-20: When will this fucking picture end. When.<br>
+ 19-10: Outright fiasco and/or unwatchably boring.<br>
+   9-0: One of the worst movies I’ve ever seen. Very rare.
+ </p>
+  </div>
+<% end %>

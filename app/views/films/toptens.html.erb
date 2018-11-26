@@ -1,0 +1,22 @@
+<% title "Top Tens - Screening Log" %>
+
+<div class="top-tens">
+<h1>Top Tens</h1>
+<%- @film_years.sort.reverse.each do |year, films| -%>
+<div class="year-list">
+   <h2><%= link_to year, year_path(year) %></h2>
+   <ol>
+      <%= render films[0..9] %>
+   </ol>
+   <%- honorable_mentions = films[10...-1] || 0 -%>
+   <%- if honorable_mentions.size > 9 -%>
+   <p class="honorable-mentions">
+    <b>HONORABLE MENTION:</b>
+    <%=  honorable_mentions.map{|film| content_tag(:b, link_to(film.title, film)) + " (" + display_directors(film) + ")"}.join(", ").html_safe  %>
+   </p>
+   <%- end -%>
+</div>
+<%- end -%>
+</div>
+
+

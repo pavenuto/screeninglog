@@ -18,13 +18,15 @@
     img {
         width: 100%;
         height: auto;
-        margin-bottom: 0.5em;
+        margin-bottom: 0.3em;
     }
     small {
         padding: 2px 5px;
-        border-radius: 2px;
-        background-color: tint(#ccc,60%);
     }
+}
+
+.film-list__info {
+    line-height: 1.35;
 }
 
 .directors__index {

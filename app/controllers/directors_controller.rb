@@ -4,7 +4,7 @@ class DirectorsController < ApplicationController
   # GET /directors
   # GET /directors.json
   def index
-    @directors = Director.all.paginate(:page => params[:page], :per_page => 30)
+    @directors = Director.all.paginate(:page => params[:page], :per_page => 50)
 
     # respond_to do |format|
     #   format.html
@@ -15,7 +15,7 @@ class DirectorsController < ApplicationController
   # GET /directors/1
   # GET /directors/1.json
   def show
-    @films = @director.films.order('year ASC')
+    @films = @director.films.includes(:screenings).order('year ASC')
   end
 
   # GET /directors/new

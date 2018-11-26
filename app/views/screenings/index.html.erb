@@ -1,0 +1,43 @@
+<% title "Screenings - Screening Log" %>
+
+<div class="screening__index">
+
+  <h1>Screenings <small><%= @screenings.count() %></small></h1>
+
+  <%= link_to 'New Screening', new_screening_path, :class => "button" %>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Film</th>
+        <th>Rating</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @screenings.each do |screening| %>
+      <tr>
+        <td><%= link_to screening.date.strftime("%Y-%m-%d"), screening, :class => "screening-date" %></td>
+        <td <%= ' class="repeat"' if screening.film.screenings.size > 1 and (screening.film.screenings.first != screening) %>><%= link_to screening.film.title, screening.film %> (<%=h screening.film.year %>, <%= display_directors(screening.film) %>)</td>
+        <td><%= screening.rating %></td>
+        <td>
+          <%= link_to edit_screening_path(screening), :class => "action-link" do %>
+            <%= fa_icon "pencil" %>
+          <% end %>
+        </td>
+        <td>
+          <%= link_to screening, method: :delete, data: { confirm: 'Are you sure?' }, :class => "action-link" do %>
+            <%= fa_icon "times" %>
+          <% end %>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <%= will_paginate @screenings %>
+
+</div>

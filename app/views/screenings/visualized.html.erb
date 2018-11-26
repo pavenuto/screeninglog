@@ -1,0 +1,117 @@
+<% title "Visualized - Screening Log" %>
+
+<%# TO DO: Refactor into virtual attribute %>
+<div class="info-graphics">
+    <div class="rating-spread">
+        <h2>Rating Distribution</h2>
+
+        <%#= @ratings.max %>
+
+        <table class="visualization-table">
+            <tr>
+                <td class="visualization-range"><h3>1-10</h3></td>
+                <td class="visualization-count"><%= @one %></td>
+                <td><div class="bar" style="width: <%= ( @one.to_f / @ratings.max ) * 100 %>%">&nbsp;</div></td>
+            </tr>
+            <tr>
+                <td class="visualization-range"><h3>11-20</h3></td>
+                <td class="visualization-count"><%= @two %></td>
+                <td><div class="bar" style="width: <%= ( @two.to_f / @ratings.max ) * 100 %>%">&nbsp;</div></td>
+            </tr>
+            <tr>
+                <td class="visualization-range"><h3>21-30</h3></td>
+                <td class="visualization-count"><%= @three %></td>
+                <td><div class="bar" style="width: <%= ( @three.to_f / @ratings.max ) * 100 %>%">&nbsp;</div></td>
+            </tr>
+            <tr>
+                <td class="visualization-range"><h3>31-40</h3></td>
+                <td class="visualization-count"><%= @four %></td>
+                <td><div class="bar" style="width: <%= ( @four.to_f / @ratings.max ) * 100 %>%">&nbsp;</div></td>
+            </tr>
+            <tr>
+                <td class="visualization-range"><h3>41-50</h3></td>
+                <td class="visualization-count"><%= @five %></td>
+                <td><div class="bar" style="width: <%= ( @five.to_f / @ratings.max ) * 100 %>%">&nbsp;</div></td>
+            </tr>
+            <tr>
+                <td class="visualization-range"><h3>51-60</h3></td>
+                <td class="visualization-count"><%= @six %></td>
+                <td><div class="bar" style="width: <%= ( @six.to_f / @ratings.max ) * 100 %>%">&nbsp;</div></td>
+            </tr>
+            <tr>
+                <td class="visualization-range"><h3>61-70</h3></td>
+                <td class="visualization-count"><%= @seven %></td>
+                <td><div class="bar" style="width: <%= ( @seven.to_f / @ratings.max ) * 100 %>%">&nbsp;</div></td>
+            </tr>
+            <tr>
+                <td class="visualization-range"><h3>71-80</h3></td>
+                <td class="visualization-count"><%= @eight %></td>
+                <td><div class="bar" style="width: <%= ( @eight.to_f / @ratings.max ) * 100 %>%">&nbsp;</div></td>
+            </tr>
+            <tr>
+                <td class="visualization-range"><h3>81-90</h3></td>
+                <td class="visualization-count"><%= @nine %></td>
+                <td><div class="bar" style="width: <%= ( @nine.to_f / @ratings.max ) * 100 %>%">&nbsp;</div></td>
+            </tr>
+            <tr>
+                <td class="visualization-range"><h3>91-100</h3></td>
+                <td class="visualization-count"><%= @ten %></td>
+                <td><div class="bar" style="width: <%= ( @ten.to_f / @ratings.max ) * 100 %>%">&nbsp;</div></td>
+            </tr>
+        </table>
+
+
+    </div>
+
+
+    <div class="most-watched-directors">
+
+        <h2>Most Watched Directors</h2>
+
+        <table class="visualization-table">
+
+        <% first = @directors.first.films.count %>
+        <% @directors.each_with_index do |director, index| %>
+        <tr>
+            <td class="most-watched-directors__director">
+            <%= link_to director do %>
+            <h3><%= index + 1 %>. <%= director.full_name %></h3>
+            <% end %>
+            </td>
+            <td class="visualization-count"><%= director.films.count %></td>
+            <td class="most-watched-directors__bar">
+                    <div class="bar" style="width: <%= ( director.films.count.to_f / 22 ) * 100 %>%">
+                        &nbsp;<%#= director.films.count %>
+                    </div>
+            </td>
+
+        </tr>
+        <% end %>
+        </table>
+
+    </div>
+
+
+    <div class="films-by-decade">
+
+        <h2>Films by Decade</h2>
+        <table class="visualization-table">
+
+        <% @decades.sort.reverse.each do |decade, films|  %>
+        <tr>
+          <td style="width: 10%;"><h3><%= decade %></h3></td>
+          <td class="visualization-count">  <%= films.count %></td>
+          <td>
+          <div class="bar" style="width:100%; max-width: <%= films.count * 1.3 %>px" title="<%= films.count %>">
+            &nbsp;
+          </div>
+         </td>
+        </tr>
+        <% end -%>
+
+        </table>
+
+    </div>
+
+
+</div>

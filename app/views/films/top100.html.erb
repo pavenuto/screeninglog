@@ -1,0 +1,31 @@
+<% title "Top 100 - Screening Log" %>
+<div class="top-100">
+    <h1>Top 100</h1>
+
+    <% if params[:type] == "grid" %>
+
+    <%= link_to("List",top_100_path,:class => "button") %>
+
+    <div class="top-100-grid">
+        <%- @films.each do |film| -%>
+
+        <div class="module">
+           <%= link_to film do %>
+            <%= image_tag image_path(film.image.url(:thumb))  %>
+           <% end %>
+       </div>
+
+    <% end -%>
+    </div>
+
+   <% else %>
+
+   <%= link_to("Grid",top_100_grid_path(type: "grid"), :class => "button") %>
+
+   <ol>
+    <%- @films.each do |film| -%>
+        <%= render film %>
+    <%- end -%>
+    </ol>
+    <% end %>
+</div>

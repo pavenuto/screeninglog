@@ -1,0 +1,28 @@
+<% title "Screenings - Screening Log" %>
+
+<h1>Recent</h1>
+
+<div class="screening__recent">
+
+  <% @screenings.each do |screening| %>
+
+  <div class="module">
+    <%= link_to screening.film do %>
+    <%= image_tag image_path(screening.film.image.url(:thumb))  %>
+    <% end %>
+
+    <div class="module__info">
+      <div class="inner-cell"><div class="center-cell">
+        <%= link_to screening.film.title, screening.film, :class => "module__film-title" %>
+        <span class="module__meta">(<%=h screening.film.year %>, <%= display_directors(screening.film) %>)<br>
+          <span class="module__rating"><%= star_rating(screening.rating) %> / <%= letter_grade(screening.rating) %></span>
+        </span></div>
+      </div>
+    </div>
+  </div>
+  <% end %>
+
+</div>
+
+<%= will_paginate @films %>
+
