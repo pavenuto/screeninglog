@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
 <head>
   <title><%= yield(:title) %></title>
@@ -11,7 +11,6 @@
   <div class="container">
 
     <header class="global-header">
-
       <nav>
         <ul>
           <li><%= link_to("Films",films_path) %></li>
@@ -21,7 +20,7 @@
             (<%= link_to("2018", "/screenings/year/2018") %>)
           </li>
           <li><%= link_to("Top Tens",top_tens_path) %></li>
-          <li><%= link_to("Top 100",top_100_path) %></li>
+          <li><%= link_to("Top 250",top_100_path) %></li>
           <li><%= link_to("Visualized",visualized_path) %></li>
           <li><%= link_to("Recent",recent_path) %></li>
         </ul>

@@ -34,6 +34,7 @@ class ScreeningsController < ApplicationController
     @ten = @screenings.where("rating >= 91 AND rating <= 100").count()
 
     @ratings = [ @one, @two, @three, @four, @five, @six, @seven, @eight, @nine, @ten]
+    @max_rating = @ratings.max
 
     @films = Film.all
     @decades = @films.group_by { |t| t.decade }

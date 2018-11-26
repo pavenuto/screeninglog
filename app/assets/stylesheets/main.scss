@@ -14,7 +14,6 @@ $grid-padding   : 3em;            // grid-padding equal to gutters
 }
 
 body {
-  // line-height: 1.5;
   background: #ccc;
   background: #efefef;
 }
@@ -55,7 +54,7 @@ a {
   @include at-breakpoint(48em 12) {
    margin-bottom: 0;
  }
- margin-top: 0.65em;
+ margin-top: 0.7em;
  margin-bottom: 0.75em;
 
  ul {
